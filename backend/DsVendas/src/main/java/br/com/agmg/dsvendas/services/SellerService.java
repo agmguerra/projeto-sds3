@@ -1,5 +1,6 @@
 package br.com.agmg.dsvendas.services;
 
+import br.com.agmg.dsvendas.dto.SaleSumDTO;
 import br.com.agmg.dsvendas.dto.SellerDTO;
 import br.com.agmg.dsvendas.entities.Seller;
 import br.com.agmg.dsvendas.repositories.SellerRepository;
@@ -22,4 +23,5 @@ public class SellerService {
 
         return result.stream().map(x -> new SellerDTO(x)).collect(Collectors.toList());
     }
+
 }

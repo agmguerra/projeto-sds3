@@ -1,6 +1,8 @@
 package br.com.agmg.dsvendas.controllers;
 
 import br.com.agmg.dsvendas.dto.SaleDTO;
+import br.com.agmg.dsvendas.dto.SaleSuccessDTO;
+import br.com.agmg.dsvendas.dto.SaleSumDTO;
 import br.com.agmg.dsvendas.dto.SellerDTO;
 import br.com.agmg.dsvendas.services.SaleService;
 import br.com.agmg.dsvendas.services.SellerService;
@@ -28,4 +30,17 @@ public class SaleController {
         Page<SaleDTO> page = service.findAll(pageable);
         return ResponseEntity.ok(page);
     }
+
+    @GetMapping(value = "/amount-by-seller")
+    public ResponseEntity<List<SaleSumDTO>> amountGroupBySeller() {
+        List<SaleSumDTO> list = service.amountGroupedBySeller();
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/success-by-seller")
+    public ResponseEntity<List<SaleSuccessDTO>> successGroupBySeller() {
+        List<SaleSuccessDTO> list = service.successGroupedBySeller();
+        return ResponseEntity.ok(list);
+    }
+
 }
