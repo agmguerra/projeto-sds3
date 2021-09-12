@@ -23,6 +23,7 @@ const DataTable = () => {
             .then(response => {
                 setPage(response.data)
             })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activePage])
 
     const changePage = (index: number) => {
