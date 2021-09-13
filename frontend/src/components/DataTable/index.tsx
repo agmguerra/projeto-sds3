@@ -1,5 +1,6 @@
 import axios from "axios";
 import Pagination from "components/pagination";
+import Spinner from "components/Spinner";
 import { useEffect, useState } from "react";
 import { SalePage } from "types/sale";
 import { formatLocalDate } from "utils/format";
@@ -7,6 +8,8 @@ import { BASE_URL } from "utils/requests";
 
 
 const DataTable = () => {
+
+    const [loaded, setLoaded] = useState(false)
 
     const [activePage, setActivePage] = useState(0)
 
@@ -19,8 +22,10 @@ const DataTable = () => {
     })
 
     useEffect(() => {
+        setLoaded(false)
         axios.get(`${BASE_URL}/sales?page=${activePage}&size=20&sort=date,desc`)
             .then(response => {
+                setLoaded(true)
                 setPage(response.data)
             })
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,8 +35,10 @@ const DataTable = () => {
         setActivePage(index)
     }
 
+
     return (
         <>
+            <Spinner loaded={loaded} />
             <Pagination page={ page } onPageChange={changePage} />
             <div className="table-responsive">
                 <table className="table table-striped table-sm">
